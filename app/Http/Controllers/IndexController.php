@@ -3,6 +3,7 @@
     namespace App\Http\Controllers;
 
     use App\Author;
+    use App\Book;
     use Illuminate\Http\Request;
 
     class IndexController extends Controller
@@ -32,5 +33,28 @@
             $authors = Author::select(['*'])->get();
 
             return view('book_create')->with(['authors' => $authors]);
+        }
+
+        public function store_book(Request $request)
+        {
+            $validatedData = $request->validate([
+                    'title' => 'required',
+            ]);
+
+            $book = new Book();
+            $book->title = $request->title;
+            $book->save();
+
+            if ($request->has('authors')) {
+                foreach ($request->authors as $item) {
+                    $target = Author::select(['id', 'first_name'])->where('id', $item)
+                            ->first();
+                    if ($target != null) {
+                        $book->author()->attach($target);
+                    }
+                }
+            }
+
+            return redirect('/books');
         }
     }

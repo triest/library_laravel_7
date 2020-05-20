@@ -11,6 +11,7 @@
 
                 <a href="{{route('authors')}}">Авторы</a>
                 <a href="{{route('books')}}">Книги</a>
+                <a href="{{route('')}}">Поиск</a>
             </div>
         </div>
     </div>
