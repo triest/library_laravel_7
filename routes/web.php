@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('main');
+
+    Route::get('/authors', 'IndexController@authors')->name('authors');
+    Route::post('/authors', 'IndexController@store_author')->name('store_author');
+
+    Route::get('/books', 'IndexController@books')->name('books');
+    Route::post('/books', 'IndexContreller@store_book')->name('store_book');
