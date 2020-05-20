@@ -88,11 +88,20 @@
 
             $books->orWhere('authors.first_name', 'like', "%" . $seach . "%");
             $books->orWhere('authors.last_name', 'like', "%" . $seach . "%");
-
             $books->select('*');
             $books = $books->get();
+
+            $seach_arry = array();
+
+            foreach ($books as $book) {
+                $bookItem = Book::get($book->id);
+                $authors = $bookItem->author()->get();
+                $item = array('book' => $bookItem, 'authors' => $authors);
+                array_push($seach_arry, $item);
+            }
+
             return response()->json([
-                    'books' => $books,
+                    'books' => $seach_arry,
             ]);
 
         }

@@ -1956,6 +1956,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37573,61 +37595,92 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("label", [_vm._v("Введите название или автора")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.seach_text,
-            expression: "seach_text"
+  return _c("div", [
+    _c("label", [_vm._v("Введите название или автора")]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.seach_text,
+          expression: "seach_text"
+        }
+      ],
+      attrs: { type: "text", id: "seac_text", name: "seac_text" },
+      domProps: { value: _vm.seach_text },
+      on: {
+        input: function($event) {
+          if ($event.target.composing) {
+            return
           }
-        ],
-        attrs: { type: "text", id: "seac_text", name: "seac_text" },
-        domProps: { value: _vm.seach_text },
+          _vm.seach_text = $event.target.value
+        }
+      }
+    }),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
         on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.seach_text = $event.target.value
+          click: function($event) {
+            return _vm.seach()
           }
         }
-      }),
+      },
+      [_vm._v("\n        Найти\n    ")]
+    ),
+    _vm._v(" "),
+    _c("table", { staticClass: "table" }, [
+      _vm._m(0),
       _vm._v(" "),
       _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          on: {
-            click: function($event) {
-              return _vm.seach()
-            }
-          }
-        },
-        [_vm._v("\n        Сохранить\n    ")]
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.books, function(item) {
-        return _c("div", [
-          _vm._v(
-            "\n        " +
-              _vm._s(item.title) +
-              "\n        " +
-              _vm._s(item.year) +
-              "\n\n    "
-          )
-        ])
-      })
-    ],
-    2
-  )
+        "tbody",
+        _vm._l(_vm.books, function(item) {
+          return _c("tr", [
+            _c("td", [_vm._v(_vm._s(item.book.title))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(item.book.year))]),
+            _vm._v(" "),
+            _c(
+              "td",
+              _vm._l(item.authors, function(author) {
+                return _c("div", [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(author.first_name) +
+                      " " +
+                      _vm._s(author.last_name) +
+                      "\n                "
+                  )
+                ])
+              }),
+              0
+            )
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("\n                Название\n            ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("\n                Год\n            ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("\n                Авторы\n            ")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
