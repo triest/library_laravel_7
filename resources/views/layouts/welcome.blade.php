@@ -62,6 +62,9 @@
                 margin-bottom: 30px;
             }
         </style>
+
+        <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
         <div class="position-ref full-height">
