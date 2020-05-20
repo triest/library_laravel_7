@@ -23,5 +23,5 @@ Route::get('/', function () {
     Route::get('/books', 'IndexController@books')->name('books');
     Route::post('/books', 'IndexController@store_book')->name('store_book');
 
-    Route::get('/search', 'IndexContreller@Search')->name('search');
-    Route::get('/search-book', 'IndexContreller@searchBook')->name('search');
+    Route::get('/search', 'IndexController@seach')->name('search');
+    Route::get('/search-book', 'IndexController@searchBook');
