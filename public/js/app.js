@@ -1978,6 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37631,6 +37632,10 @@ var render = function() {
       },
       [_vm._v("\n        Найти\n    ")]
     ),
+    _vm._v(" "),
+    _c("a", { staticClass: "btn btn-success", attrs: { href: "/" } }, [
+      _vm._v("Назад")
+    ]),
     _vm._v(" "),
     _c("table", { staticClass: "table" }, [
       _vm._m(0),

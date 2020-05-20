@@ -5,6 +5,7 @@
         <button class="btn btn-primary" v-on:click="seach()">
             Найти
         </button>
+        <a class="btn btn-success" href="/">Назад</a>
         <table class="table">
             <thead>
             <tr>

@@ -83,12 +83,12 @@
                     'authors.id');
 
 
-            $books->where('books.title', 'like', "%" . $seach . "%");
-            $books->where('books.title', 'like', "%" . $seach . "%");
+         //   $books->where('books.title', 'like', "%" . $seach . "%");
 
             $books->orWhere('authors.first_name', 'like', "%" . $seach . "%");
             $books->orWhere('authors.last_name', 'like', "%" . $seach . "%");
             $books->select('*');
+
             $books = $books->get();
 
             $seach_arry = array();
