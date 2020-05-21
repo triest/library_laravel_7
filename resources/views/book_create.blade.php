@@ -20,7 +20,7 @@
                 <label class="control-label col-sm-2">
                     Авторы:
                 </label><br>
-                <label class="control-label col-sm-2">
+                <label class="control-label col-sm-3">
                     @foreach($authors as $item)
                         <p>
                             <input type="checkbox" value="{{$item->id}}" name="authors[]">

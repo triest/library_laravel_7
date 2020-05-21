@@ -13,7 +13,7 @@
         //
         public function authors(Request $request)
         {
-            $authors = Author::select(['*'])->paginate(20);
+            $authors = Author::select(['*'])->paginate(5);
 
             return view('author_create')->with(['authors' => $authors]);
         }
@@ -35,7 +35,7 @@
         public function books()
         {
             $authors = Author::select(['*'])->get();
-            $books = Book::select(['*'])->paginate(20);
+            $books = Book::select(['*'])->paginate(5);
 
             return view('book_create')->with(['authors' => $authors, 'books' => $books]);
         }
@@ -63,7 +63,7 @@
 
         public function seach(Request $request)
         {
-            return view('seach');
+            return view('search');
         }
 
         public function searchBook(Request $request)
@@ -102,6 +102,7 @@
                 $item = array('book' => $bookItem, 'authors' => $authors);
                 array_push($seach_arry, $item);
             }
+            $seach_arry = array_unique($seach_arry, SORT_REGULAR);
 
             return response()->json([
                     'books' => $seach_arry,

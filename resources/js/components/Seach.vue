@@ -13,9 +13,6 @@
                     Название
                 </th>
                 <th>
-                    Год
-                </th>
-                <th>
                     Авторы
                 </th>
             </tr>
@@ -23,7 +20,6 @@
             <tbody>
             <tr v-for="item in books">
                 <td>{{item.book.title}}</td>
-                <td>{{item.book.year}}</td>
                 <td>
                     <div v-for="author in item.authors">
                         {{author.first_name}} {{author.last_name}}

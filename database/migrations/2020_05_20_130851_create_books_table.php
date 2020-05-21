@@ -16,7 +16,6 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title')->default(null)->nullable();
-            $table->integer('year')->unsigned()->nullable();
             $table->timestamps();
         });
     }
