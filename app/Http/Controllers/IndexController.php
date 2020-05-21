@@ -4,6 +4,7 @@
 
     use App\Author;
     use App\Book;
+    use App\Builders\BookBuilder;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
 
@@ -12,7 +13,9 @@
         //
         public function authors(Request $request)
         {
-            return view('author_create');
+            $authors = Author::select(['*'])->paginate(20);
+
+            return view('author_create')->with(['authors' => $authors]);
         }
 
         public function store_author(Request $request)
@@ -32,8 +35,9 @@
         public function books()
         {
             $authors = Author::select(['*'])->get();
+            $books = Book::select(['*'])->paginate(20);
 
-            return view('book_create')->with(['authors' => $authors]);
+            return view('book_create')->with(['authors' => $authors, 'books' => $books]);
         }
 
         public function store_book(Request $request)
@@ -42,19 +46,17 @@
                     'title' => 'required',
             ]);
 
-            $book = new Book();
-            $book->title = $request->title;
-            $book->save();
-
+            $bookBuilder = new BookBuilder();
+            $bookBuilder->setTitle($request->title);
             if ($request->has('authors')) {
                 foreach ($request->authors as $item) {
-                    $target = Author::select(['id', 'first_name'])->where('id', $item)
-                            ->first();
-                    if ($target != null) {
-                        $book->author()->attach($target);
+                    $author = Author::get($item);
+                    if ($author != null) {
+                        $bookBuilder->addAuthor($author);
                     }
                 }
             }
+            $bookBuilder->save();
 
             return redirect('/books');
         }
@@ -73,22 +75,23 @@
             $seach = $request->seach;
 
             $books = null;
-            $books = DB::table('book_author');
+            $books = DB::table('books');
 
-            $books->leftJoin('books', 'book_author.book_id', '=',
+            $books->leftJoin('book_author', 'book_author.book_id', '=',
                     'books.id');
 
+            $authors = Author::select('*')->where('first_name', 'like', "%" . $seach . "%")->orWhere('last_name',
+                    'like', "%" . $seach . "%")->get();
 
-            $books->leftJoin('authors', 'book_author.author_id', '=',
-                    'authors.id');
+            $authors_array = array();
+            foreach ($authors as $author) {
+                array_push($authors_array, $author->id);
+            }
 
+            $books->whereIn('book_author.author_id', $authors_array);
+            $books->orWhere('books.title', 'like', "%" . $seach . "%");
 
-         //   $books->where('books.title', 'like', "%" . $seach . "%");
-
-            $books->orWhere('authors.first_name', 'like', "%" . $seach . "%");
-            $books->orWhere('authors.last_name', 'like', "%" . $seach . "%");
-            $books->select('*');
-
+            $books->select('books.*');
             $books = $books->get();
 
             $seach_arry = array();

@@ -1,9 +1,9 @@
-@extends('layouts.welcome', ['title' => "Главная страница"])
+@extends('layouts.welcome', ['title' => "Поиск"])
 
 
 
 @section('content')
-    <div class="links">
+    <div class="container">
         <div id="app">
             <seach></seach>
         </div>

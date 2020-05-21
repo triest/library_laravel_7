@@ -33,5 +33,39 @@
             <button class="btn btn-primary">Создать книгу</button>
             <a class="btn btn-success" href="{{route('main')}}">Назад</a> </b>
         </form>
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    Название книги
+                </th>
+                <th>
+                    Автор
+                </th>
+
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($books as $book)
+                <tr>
+                    <td>
+                        {{$book->title}}
+                    </td>
+                    <? $authors = $book->author()->get() ?>
+                    <td>
+                        @foreach($authors as $author)
+                            {{$author->first_name}}   {{$author->last_name}}
+                            @if(!$loop->last)
+                                ,
+                            @endif
+                        @endforeach
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+        {{ $books->links() }}
     </div>
 @endsection
